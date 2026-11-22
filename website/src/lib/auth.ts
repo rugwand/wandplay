@@ -1,5 +1,7 @@
 // src/lib/auth.ts (or your auth config file)
 import { betterAuth } from "better-auth";
+import { APIError } from 'better-auth/api';
+
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { env as privateEnv } from '$env/dynamic/private';
 import { env as publicEnv } from '$env/dynamic/public';
@@ -17,6 +19,22 @@ if (!privateEnv.GOOGLE_CLIENT_SECRET) throw new Error('GOOGLE_CLIENT_SECRET is n
 if (!publicEnv.PUBLIC_BETTER_AUTH_URL) throw new Error('PUBLIC_BETTER_AUTH_URL is not set');
 
 export const auth = betterAuth({
+    databaseHooks: {
+        user: {
+            create: {
+                before: async (record) => {
+                    await db.insert(schema.platformControl).values({ id: 1 }).onConflictDoNothing();
+                    const [policy] = await db.select().from(schema.platformControl).limit(1);
+                    if (!policy.registrationsEnabled) throw new APIError('FORBIDDEN', { message: 'Registrations are currently disabled' });
+                    return { data: {
+                        ...record,
+                        baseCurrencyBalance: policy.startingCash,
+                        gems: policy.startingGems
+                    }};
+                }
+            }
+        }
+    },
     baseURL: publicEnv.PUBLIC_BETTER_AUTH_URL,
     secret: privateEnv.PRIVATE_BETTER_AUTH_SECRET,
     appName: "Rugplay",
@@ -91,6 +109,7 @@ export const auth = betterAuth({
             isAdmin: { type: "boolean", required: true, input: false, defaultValue: false },
             isBanned: { type: "boolean", required: false, input: false },
             banReason: { type: "string", required: false, input: false },
+            gems: { type: 'number', required: false, input: false, defaultValue: 0 },
             baseCurrencyBalance: { type: "string", required: false, input: false },
             bio: { type: "string", required: false, input: false },
             volumeMaster: { type: "string", required: false, input: false },

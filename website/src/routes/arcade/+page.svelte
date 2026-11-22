@@ -23,6 +23,16 @@
 	import { replaceState } from '$app/navigation';
 
 	let shouldSignIn = $state(false);
+let disabledGames = $state<string[]>([]);
+onMount(async () => {
+    try {
+        const response = await fetch('/api/platform/arcade');
+        if (response.ok) {
+            const payload = await response.json();
+            disabledGames = payload.games.filter((entry: { game: string; enabled: boolean }) => !entry.enabled).map((entry: { game: string }) => entry.game);
+        }
+    } catch { /* Server-side policy remains authoritative. */ }
+});
 	let balance = $state(0);
 	const GAMES = ['coinflip', 'slots', 'mines', 'dice', 'tower', 'blackjack'];
 	const LAST_GAME_KEY = 'rugplay:arcade-game';
@@ -137,7 +147,9 @@
 			</div>
 
 			<!-- Game Content -->
-			{#if activeGame === 'coinflip'}
+			{#if disabledGames.includes(activeGame)}
+    <Card><CardContent class="py-8 text-center text-sm text-muted-foreground">This game is temporarily disabled by the administrators.</CardContent></Card>
+{:else if activeGame === 'coinflip'}
 				<Coinflip bind:balance onBalanceUpdate={handleBalanceUpdate} />
 			{:else if activeGame === 'slots'}
 				<Slots bind:balance onBalanceUpdate={handleBalanceUpdate} />

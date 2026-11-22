@@ -501,3 +501,68 @@ export const adminBalanceAdjustment = pgTable("admin_balance_adjustment", {
     createdAtIdx: index("admin_balance_created_at_idx").on(table.createdAt)
 }));
 
+
+// Coin moderation history. Coin ID is intentionally not a foreign key so audit
+// records remain available if a coin is deleted through a different workflow.
+export const coinModerationLog = pgTable('coin_moderation_log', {
+    id: serial('id').primaryKey(),
+    coinId: integer('coin_id').notNull(),
+    coinName: varchar('coin_name', { length: 255 }).notNull(),
+    coinSymbol: varchar('coin_symbol', { length: 10 }).notNull(),
+    adminUserId: integer('admin_user_id').references(() => user.id, { onDelete: 'set null' }),
+    adminUsername: varchar('admin_username', { length: 30 }).notNull(),
+    action: varchar('action', { length: 10 }).notNull(),
+    reason: text('reason').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow()
+}, (table) => ({
+    coinIdx: index('coin_moderation_coin_idx').on(table.coinId),
+    createdAtIdx: index('coin_moderation_created_at_idx').on(table.createdAt)
+}));
+
+// Admin Control Center v1: persistent platform policies and notification delivery.
+export const platformControl = pgTable('platform_control', {
+    id: integer('id').primaryKey().default(1),
+    maintenance: boolean('maintenance').notNull().default(false),
+    registrationsEnabled: boolean('registrations_enabled').notNull().default(true),
+    coinCreationEnabled: boolean('coin_creation_enabled').notNull().default(true),
+    maxCoinsPerUser: integer('max_coins_per_user').notNull().default(0), // 0 = unlimited
+    startingCash: decimal('starting_cash', { precision: 30, scale: 8 }).notNull().default('100.00000000'),
+    startingGems: integer('starting_gems').notNull().default(0),
+    coinFeeMultiplier: decimal('coin_fee_multiplier', { precision: 6, scale: 2 }).notNull().default('1.00'),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow()
+});
+
+export const arcadeControl = pgTable('arcade_control', {
+    game: varchar('game', { length: 20 }).primaryKey(),
+    enabled: boolean('enabled').notNull().default(true),
+    minBet: decimal('min_bet', { precision: 30, scale: 8 }).notNull().default('0.01000000'),
+    maxBet: decimal('max_bet', { precision: 30, scale: 8 }).notNull().default('1000000.00000000'),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow()
+});
+
+export const platformAnnouncement = pgTable('platform_announcement', {
+    id: serial('id').primaryKey(),
+    title: varchar('title', { length: 200 }).notNull(),
+    message: text('message').notNull(),
+    kind: varchar('kind', { length: 20 }).notNull().default('announcement'),
+    link: text('link'),
+    scheduledAt: timestamp('scheduled_at', { withTimezone: true }).notNull(),
+    sentAt: timestamp('sent_at', { withTimezone: true }),
+    cancelledAt: timestamp('cancelled_at', { withTimezone: true }),
+    createdBy: integer('created_by').references(() => user.id, { onDelete: 'set null' }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow()
+}, (table) => ({ scheduledIdx: index('platform_announcement_scheduled_idx').on(table.scheduledAt) }));
+
+export const platformAnnouncementDelivery = pgTable('platform_announcement_delivery', {
+    announcementId: integer('announcement_id').notNull().references(() => platformAnnouncement.id, { onDelete: 'cascade' }),
+    userId: integer('user_id').notNull().references(() => user.id, { onDelete: 'cascade' })
+}, (table) => ({ pk: primaryKey({ columns: [table.announcementId, table.userId] }) }));
+
+export const platformControlAudit = pgTable('platform_control_audit', {
+    id: serial('id').primaryKey(),
+    adminId: integer('admin_id').references(() => user.id, { onDelete: 'set null' }),
+    adminUsername: varchar('admin_username', { length: 30 }).notNull(),
+    section: varchar('section', { length: 32 }).notNull(),
+    details: text('details').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow()
+});

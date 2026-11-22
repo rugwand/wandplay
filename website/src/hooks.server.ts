@@ -10,6 +10,7 @@ import { user } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { minesCleanupInactiveGames, minesAutoCashout } from '$lib/server/games/mines';
 import { towerCleanupInactiveGames } from '$lib/server/games/tower';
+import { getPlatformControl, arcadeRequestError, dispatchDueAnnouncements } from '$lib/server/control-center';
 import { checkRateLimit } from '$lib/server/ratelimit';
 
 const RATE_RULES: Array<{
@@ -88,12 +89,14 @@ async function initializeScheduler() {
             processAccountDeletions().catch(console.error);
             rolloverSeasons().catch(console.error);
             cleanupExpiredSessions().catch(console.error);
+            dispatchDueAnnouncements().catch(console.error);
 
             const schedulerInterval = setInterval(() => {
                 resolveExpiredQuestions().catch(console.error);
                 processAccountDeletions().catch(console.error);
                 rolloverSeasons().catch(console.error);
                 cleanupExpiredSessions().catch(console.error);
+            dispatchDueAnnouncements().catch(console.error);
             }, 5 * 60 * 1000);
 
             const minesCleanupInterval = setInterval(() => {
@@ -246,6 +249,30 @@ export const handle: Handle = async ({ event, resolve }) => {
     }
 
     event.locals.userSession = userData;
+
+    // Admin Control Center: maintenance and server-enforced Arcade policies.
+    if (!building) {
+        const platform = await getPlatformControl();
+        if (platform.maintenance && !userData?.isAdmin &&
+            !event.url.pathname.startsWith('/_app/') &&
+            !event.url.pathname.startsWith('/favicon') &&
+            !event.url.pathname.startsWith('/api/auth/')) {
+            if (event.url.pathname.startsWith('/api/')) {
+                return new Response(JSON.stringify({ error: 'Maintenance mode' }), {
+                    status: 503, headers: { 'Content-Type': 'application/json', 'Retry-After': '300' }
+                });
+            }
+            return new Response('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Maintenance</title></head><body style="background:#09090b;color:#eee;font:16px system-ui;max-width:680px;margin:14vh auto;padding:24px"><h1>Maintenance</h1><p>Rugplay is temporarily unavailable.</p></body></html>', {
+                status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Retry-After': '300' }
+            });
+        }
+        if (event.url.pathname.startsWith('/api/arcade/')) {
+            const policyError = await arcadeRequestError(event.url.pathname, event.request);
+            if (policyError) return new Response(JSON.stringify({ error: policyError }), {
+                status: 403, headers: { 'Content-Type': 'application/json' }
+            });
+        }
+    }
 
     if (userData && event.url.pathname.startsWith('/api/')) {
         const path = event.url.pathname;

@@ -82,5 +82,30 @@
     </Card.Content>
 </Card.Root>
 
-    </div>
+            <Card.Root>
+            <Card.Header>
+                <Card.Title>Coin Management</Card.Title>
+            </Card.Header>
+            <Card.Content class="space-y-3">
+                <p class="text-sm text-muted-foreground">
+                    Take down and restore coins, and review moderation history.
+                </p>
+                <Button onclick={() => navigate('/admin/coins')}>
+                    Open Coin Management
+                </Button>
+            </Card.Content>
+        </Card.Root>
+        <Card.Root>
+            <Card.Header><Card.Title>Announcement Manager</Card.Title></Card.Header>
+            <Card.Content class="space-y-3"><p class="text-sm text-muted-foreground">Send or schedule notifications for all users.</p><Button onclick={() => navigate('/admin/announcements')}>Manage Announcements</Button></Card.Content>
+        </Card.Root>
+        <Card.Root>
+            <Card.Header><Card.Title>Arcade Management</Card.Title></Card.Header>
+            <Card.Content class="space-y-3"><p class="text-sm text-muted-foreground">Enable games, manage bets and review wagering totals.</p><Button onclick={() => navigate('/admin/arcade-control')}>Manage Arcade</Button></Card.Content>
+        </Card.Root>
+        <Card.Root>
+            <Card.Header><Card.Title>Global Settings</Card.Title></Card.Header>
+            <Card.Content class="space-y-3"><p class="text-sm text-muted-foreground">Control registrations, maintenance, new-user balances and coin creation.</p><Button onclick={() => navigate('/admin/global-control')}>Open Global Settings</Button></Card.Content>
+        </Card.Root>
+</div>
 </div>

@@ -1,4 +1,5 @@
 import { auth } from '$lib/auth';
+import { getPlatformControl } from '$lib/server/control-center';
 import { error, json } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { coin, user, priceHistory } from '$lib/server/db/schema';
@@ -63,6 +64,7 @@ export async function GET({ request }) {
         throw error(401, 'Not authenticated');
     }
 
+    const control = await getPlatformControl();
     const userId = Number(session.user.id);
 
     const [{ coinsCreated }] = await db
@@ -71,14 +73,16 @@ export async function GET({ request }) {
         .where(eq(coin.creatorId, userId));
 
     const created = Number(coinsCreated);
-    const creationFee = getCreationFee(created);
+    const creationFee = Math.round(getCreationFee(created) * Number(control.coinFeeMultiplier) * 1e8) / 1e8;
 
     return json({
         coinsCreated: created,
+        maxCoinsPerUser: control.maxCoinsPerUser,
+        coinCreationEnabled: control.coinCreationEnabled,
         creationFee,
         liquidityDeposit: INITIAL_LIQUIDITY,
         totalCost: creationFee + INITIAL_LIQUIDITY,
-        nextCreationFee: getCreationFee(created + 1)
+        nextCreationFee: Math.round(getCreationFee(created + 1) * Number(control.coinFeeMultiplier) * 1e8) / 1e8
     });
 }
 
@@ -91,6 +95,8 @@ export async function POST({ request }) {
         throw error(401, 'Not authenticated');
     }
 
+    const control = await getPlatformControl();
+    if (!control.coinCreationEnabled) throw error(403, 'Coin creation is disabled');
     const formData = await request.formData();
     const name = formData.get('name') as string;
     const symbol = formData.get('symbol') as string;
@@ -133,7 +139,11 @@ export async function POST({ request }) {
                 .from(coin)
                 .where(eq(coin.creatorId, userId));
 
-            creationFee = getCreationFee(Number(coinsCreated));
+            if (!control.coinCreationEnabled) throw error(403, 'Coin creation is disabled');
+            if (control.maxCoinsPerUser > 0 && Number(coinsCreated) >= control.maxCoinsPerUser) {
+                throw error(403, 'Maximum coins per user reached');
+            }
+            creationFee = Math.round(getCreationFee(Number(coinsCreated)) * Number(control.coinFeeMultiplier) * 1e8) / 1e8;
             const totalCost = creationFee + INITIAL_LIQUIDITY;
 
             const currentBalance = Number(userData.baseCurrencyBalance);
