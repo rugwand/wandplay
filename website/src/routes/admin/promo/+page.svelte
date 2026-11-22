@@ -128,7 +128,7 @@
 </script>
 
 <svelte:head>
-	<title>Promo Codes - Admin | Rugplay</title>
+	<title>Promo Codes - Admin | Wandplay</title>
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 

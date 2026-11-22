@@ -341,8 +341,8 @@
 </script>
 
 <SEO
-	title="Transactions - Rugplay"
-	description="View your complete trading history and transaction records in the Rugplay cryptocurrency simulation game."
+	title="Transactions - Wandplay"
+	description="View your complete trading history and transaction records in the Wandplay cryptocurrency simulation game."
 	noindex={true}
 	keywords="trading history game, transaction records simulator, crypto trading log, virtual trading history"
 />

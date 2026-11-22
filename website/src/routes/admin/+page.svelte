@@ -10,7 +10,7 @@
 </script>
 
 <svelte:head>
-    <title>Admin Panel | Rugplay</title>
+    <title>Admin Panel | Wandplay</title>
 </svelte:head>
 
 <div class="container mx-auto max-w-4xl space-y-6 py-6">
@@ -19,7 +19,7 @@
             Admin Panel
         </h1>
         <p class="text-sm text-muted-foreground">
-            Manage and configure your Rugplay platform.
+            Manage and configure your Wandplay platform.
         </p>
     </div>
 
@@ -106,6 +106,13 @@
         <Card.Root>
             <Card.Header><Card.Title>Global Settings</Card.Title></Card.Header>
             <Card.Content class="space-y-3"><p class="text-sm text-muted-foreground">Control registrations, maintenance, new-user balances and coin creation.</p><Button onclick={() => navigate('/admin/global-control')}>Open Global Settings</Button></Card.Content>
+        </Card.Root>
+        <Card.Root>
+            <Card.Header><Card.Title>Player Reports</Card.Title></Card.Header>
+            <Card.Content class="space-y-3">
+                <p class="text-sm text-muted-foreground">Review player, coin and comment reports.</p>
+                <Button onclick={() => navigate('/admin/reports')}>Review Reports</Button>
+            </Card.Content>
         </Card.Root>
 </div>
 </div>

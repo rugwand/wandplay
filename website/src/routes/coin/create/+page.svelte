@@ -146,8 +146,8 @@
 </script>
 
 <SEO
-	title="Create Coin - Rugplay"
-	description="Launch your own virtual cryptocurrency in the Rugplay simulation game. Create coins with custom names, symbols, and icons."
+	title="Create Coin - Wandplay"
+	description="Launch your own virtual cryptocurrency in the Wandplay simulation game. Create coins with custom names, symbols, and icons."
 	keywords="create virtual cryptocurrency, coin creation game, launch crypto simulation, virtual token creation, cryptocurrency game creator"
 />
 

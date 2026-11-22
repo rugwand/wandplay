@@ -653,12 +653,12 @@
 <SEO
 	title={coin
 		? browser
-			? `$${formatPrice(coin.currentPrice)} · *${coin.symbol} · ${coin.name} - Rugplay`
-			: `${coin.name} (*${coin.symbol}) - Rugplay`
-		: `Loading ${coinSymbol.toUpperCase()} - Rugplay`}
+			? `$${formatPrice(coin.currentPrice)} · *${coin.symbol} · ${coin.name} - Wandplay`
+			: `${coin.name} (*${coin.symbol}) - Wandplay`
+		: `Loading ${coinSymbol.toUpperCase()} - Wandplay`}
 	description={coin
-		? `Trade ${coin.name} (*${coin.symbol}) in the Rugplay simulation game. Current price: $${formatPrice(coin.currentPrice)}, Market cap: ${formatMarketCap(coin.marketCap)}, 24h change: ${coin.change24h >= 0 ? '+' : ''}${coin.change24h.toFixed(2)}%.`
-		: `Virtual cryptocurrency trading page for ${coinSymbol.toUpperCase()} in the Rugplay simulation game.`}
+		? `Trade ${coin.name} (*${coin.symbol}) in the Wandplay simulation game. Current price: $${formatPrice(coin.currentPrice)}, Market cap: ${formatMarketCap(coin.marketCap)}, 24h change: ${coin.change24h >= 0 ? '+' : ''}${coin.change24h.toFixed(2)}%.`
+		: `Virtual cryptocurrency trading page for ${coinSymbol.toUpperCase()} in the Wandplay simulation game.`}
 	keywords={coin
 		? `${coin.name} cryptocurrency game, *${coin.symbol} virtual trading, ${coin.symbol} price simulation, cryptocurrency trading game, virtual coin ${coin.symbol}`
 		: `${coinSymbol} virtual cryptocurrency, crypto trading simulation, virtual coin trading`}

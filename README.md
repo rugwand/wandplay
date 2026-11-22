@@ -1,19 +1,21 @@
-<img style="width: 128px; height: 128px" src="website/static/favicon.svg" /><h1 style="font-size: 48px"><a href="https://rugplay.com">Rugplay.com</a> - the fake crypto simulator.</h1>
+# Wandplay
 
-[Privacy Policy](https://rugplay.com/legal/privacy) | [Terms of Service](https://rugplay.com/legal/terms) | [License](LICENSE) | [YouTube video](https://www.youtube.com/watch?v=nRUkvPMphRc)
+An independent, noncommercial multiplayer crypto trading simulator fork.
+
+[Source code](https://github.com/1neplex/rugplay) | [Original Rugplay project](https://github.com/outpoot/rugplay) | [License](LICENSE)
 
 ## About
 
-Rugplay is a realistic cryptocurrency trading simulator that lets you experience the risks and mechanics of decentralized exchanges without real financial consequences. Create coins, trade with liquidity pools, and learn about "rug pulls" in a... relatively safe environment :)
+Wandplay is a realistic cryptocurrency trading simulator that lets you experience the risks and mechanics of decentralized exchanges without real financial consequences. Create coins, trade with liquidity pools, and learn about "rug pulls" in a... relatively safe environment :)
 
 ## Features
-- 🪙 Create coins
-- 🟢 Buy coins
-- 🔴 Sell coins
-- ⚖️ Predict on questions (similar to Polymarket)
-- 🎲 Play arcade games
-- 📊 View a Treemap graph of the entire market
-- 🏆 Compete on leaderboards
+- Ã°Å¸Âªâ„¢ Create coins
+- Ã°Å¸Å¸Â¢ Buy coins
+- Ã°Å¸â€Â´ Sell coins
+- Ã¢Å¡â€“Ã¯Â¸Â Predict on questions (similar to Polymarket)
+- Ã°Å¸Å½Â² Play arcade games
+- Ã°Å¸â€œÅ  View a Treemap graph of the entire market
+- Ã°Å¸Ââ€  Compete on leaderboards
 
 ![Preview 2](github_assets/preview2.png)
 ![Preview](github_assets/preview.png)
@@ -33,7 +35,7 @@ Before you begin, make sure you have the following installed:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/outpoot/rugplay.git
+   git clone https://github.com/1neplex/rugplay.git
    cd rugplay
    ```
 
@@ -186,6 +188,17 @@ Before you begin, make sure you have the following installed:
     cd website/websocket
     bun run src/main.ts
     ```
+
+## Credits and attribution
+
+- **Wandplay:** independently developed and maintained by **wand**.
+- **Original Rugplay:** created by **FaceDev**, source maintained by [outpoot](https://github.com/outpoot/rugplay).
+- **Catplay:** [lordpipon/catplay](https://github.com/lordpipon/catplay), source for the adapted Blackjack game and email/password interface.
+- **Achievement icons:** [gvstr](https://twitter.com/gvesster).
+- **Chest animations:** [admurin](https://admurin.itch.io/).
+- **Halloween badge:** [smalllikeart](https://www.flaticon.com/authors/smalllikeart).
+
+This is an independent, noncommercial adaptation and is not endorsed by the original developers. See the source repositories, commit history, and LICENSE for provenance and licensing.
 
 ## License
 

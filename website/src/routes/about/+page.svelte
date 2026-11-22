@@ -23,18 +23,18 @@
 <UserManualModal bind:open={showUserManual} />
 
 <svelte:head>
-	<title>About - Rugplay</title>
+	<title>About - Wandplay</title>
 	<meta
 		name="description"
-		content="Learn about Rugplay - a realistic cryptocurrency trading simulation focusing on DeFi risks and mechanics."
+		content="Learn about Wandplay - a realistic cryptocurrency trading simulation focusing on DeFi risks and mechanics."
 	/>
 </svelte:head>
 
 <div class="container mx-auto space-y-8 py-8 sm:px-4">
 	<div class="space-y-4 text-center">
 		<div class="mb-4 flex items-center justify-center gap-2">
-			<img src="/rugplay.svg" class="h-12 w-12" alt="Rugplay" />
-			<h1 class="text-4xl font-bold">Rugplay</h1>
+			<img src="/rugplay.svg" class="h-12 w-12" alt="Wandplay" />
+			<h1 class="text-4xl font-bold">Wandplay</h1>
 		</div>
 		<p class="text-muted-foreground mx-auto max-w-2xl text-lg">
 			A crypto trading simulator where you can practice trading without losing real money. Create
@@ -53,13 +53,13 @@
 			<CardHeader>
 				<CardTitle class="flex items-center gap-2">
 					<HugeiconsIcon icon={Coins01Icon} class="text-primary h-5 w-5" />
-					About Rugplay
+					About Wandplay
 				</CardTitle>
 			</CardHeader>
 			<CardContent>
 				<div class="space-y-3">
 					<p class="text-muted-foreground text-sm">
-						Rugplay is a realistic cryptocurrency trading simulation that focuses on DeFi
+						Wandplay is a realistic cryptocurrency trading simulation that focuses on DeFi
 						(Decentralized Finance) mechanics and the inherent risks of decentralized trading.
 					</p>
 					<p class="text-muted-foreground text-sm">
@@ -84,31 +84,31 @@
 			<CardContent>
 				<div class="space-y-2">
 					<div class="flex items-center gap-2 text-sm">
-						<span>🪙</span>
+						<span>&#x1FA99;</span>
 						<span>Create coins</span>
 					</div>
 					<div class="flex items-center gap-2 text-sm">
-						<span>🟢</span>
+						<span>&#x1F7E2;</span>
 						<span>Buy coins</span>
 					</div>
 					<div class="flex items-center gap-2 text-sm">
-						<span>🔴</span>
+						<span>&#x1F534;</span>
 						<span>Sell coins</span>
 					</div>
 					<div class="flex items-center gap-2 text-sm">
-						<span>⚖️</span>
+						<span>&#x2696;&#xFE0F;</span>
 						<span>Predict on questions (similar to Polymarket)</span>
 					</div>
 					<div class="flex items-center gap-2 text-sm">
-						<span>🎲</span>
+						<span>&#x1F3B2;</span>
 						<span>Play arcade games</span>
 					</div>
 					<div class="flex items-center gap-2 text-sm">
-						<span>📊</span>
+						<span>&#x1F4CA;</span>
 						<span>View a Treemap graph of the entire market</span>
 					</div>
 					<div class="flex items-center gap-2 text-sm">
-						<span>🏆</span>
+						<span>&#x1F3C6;</span>
 						<span>Compete on leaderboards</span>
 					</div>
 				</div>
@@ -124,7 +124,25 @@
 			</CardHeader>
 			<CardContent>
 				<div class="space-y-4">
-					<p class="text-muted-foreground text-sm">Created by <strong>FaceDev</strong></p>
+					<!-- Wandplay credits -->
+                    <p class="text-muted-foreground text-sm">
+                        <strong>Wandplay</strong> is an independent, noncommercial fork developed by
+                        <strong>wand</strong>.
+                    </p>
+                    <p class="text-muted-foreground text-sm">
+                        Original <strong>Rugplay</strong> created by <strong>FaceDev</strong>;
+                        open-source project maintained by
+                        <a href="https://github.com/outpoot/rugplay" target="_blank" rel="noopener noreferrer" class="text-primary underline">outpoot</a>.
+                    </p>
+                    <p class="text-muted-foreground text-sm">
+                        Blackjack and parts of the email/password sign-in interface adapted from
+                        <a href="https://github.com/lordpipon/catplay" target="_blank" rel="noopener noreferrer" class="text-primary underline">Catplay</a>
+                        by <strong>lordpipon</strong>.
+                    </p>
+                    <p class="text-muted-foreground text-sm">
+                        Original projects and assets retain their respective licenses and credits.
+                        Wandplay is not affiliated with or endorsed by the original developers.
+                    </p>
 					<div class="flex flex-wrap gap-2">
 						<Button
 							variant="outline"

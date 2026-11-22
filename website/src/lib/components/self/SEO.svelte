@@ -2,13 +2,13 @@
 	import { page } from '$app/stores';
 
 	let {
-		title = 'Rugplay',
+		title = 'Wandplay',
 		description = 'Experience realistic cryptocurrency trading simulation game with AI-powered markets, rug pull mechanics, and virtual currencies. Learn crypto trading without financial risk in this educational game.',
 		type = 'website',
 		image = '/apple-touch-icon.png',
-		imageAlt = 'Rugplay Logo',
+		imageAlt = 'Wandplay Logo',
 		keywords = '',
-		author = 'Outpoot',
+		author = 'Wandplay Team',
 		canonicalUrl = '',
 		noindex = false,
 		twitterCard = 'summary_large_image'
@@ -29,7 +29,7 @@
 	let canonical = $derived(canonicalUrl || currentUrl);
 
 	let fullImageUrl = $derived(
-		image?.startsWith('http') ? image : `${$page?.url?.origin || 'https://rugplay.com'}${image}`
+		image?.startsWith('http') ? image : `${$page?.url?.origin || ''}${image}`
 	);
 
 	let defaultKeywords =
@@ -62,7 +62,7 @@
 	<meta property="og:url" content={currentUrl} />
 	<meta property="og:image" content={fullImageUrl} />
 	<meta property="og:image:alt" content={imageAlt} />
-	<meta property="og:site_name" content="Rugplay" />
+	<meta property="og:site_name" content="Wandplay" />
 	<meta property="og:locale" content="en_US" />
 
 	<!-- Twitter Card Meta Tags -->
@@ -71,13 +71,11 @@
 	<meta name="twitter:description" content={description} />
 	<meta name="twitter:image" content={fullImageUrl} />
 	<meta name="twitter:image:alt" content={imageAlt} />
-	<meta name="twitter:site" content="@facedevstuff" />
-	<meta name="twitter:creator" content="@facedevstuff" />
 
 	<!-- Additional Meta Tags -->
 	<meta name="theme-color" content="#fb2c36" />
-	<meta name="application-name" content="Rugplay" />
-	<meta name="apple-mobile-web-app-title" content="Rugplay" />
+	<meta name="application-name" content="Wandplay" />
+	<meta name="apple-mobile-web-app-title" content="Wandplay" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 </svelte:head>

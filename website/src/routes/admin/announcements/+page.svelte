@@ -48,7 +48,7 @@
     }
     onMount(() => { void refresh(); });
 </script>
-<svelte:head><title>Announcement Manager | Rugplay</title></svelte:head>
+<svelte:head><title>Announcement Manager | Wandplay</title></svelte:head>
 <div class="container mx-auto max-w-4xl space-y-6 py-6">
     <div><h1 class="text-2xl font-semibold tracking-tight">Announcement Manager</h1><p class="text-sm text-muted-foreground">Send system notifications now or schedule delivery.</p></div>
     <Card.Root>
@@ -58,7 +58,7 @@
             <div class="space-y-2"><label class="text-sm font-medium" for="amsg">Message</label><Textarea id="amsg" bind:value={message} placeholder="Message for all users" /></div>
             <div class="space-y-2"><label class="text-sm font-medium" for="akind">Type</label><select id="akind" bind:value={kind} class="h-10 w-full rounded-md border bg-background px-3 text-sm"><option value="announcement">Announcement</option><option value="notice">Notice</option><option value="maintenance">Maintenance notice</option></select></div>
             <div class="space-y-2"><label class="text-sm font-medium" for="alink">Optional internal link</label><Input id="alink" bind:value={link} placeholder="/market" /></div>
-            <div class="space-y-2"><label class="text-sm font-medium" for="adate">Schedule (optional)</label><Input id="adate" type="datetime-local" bind:value={schedule} /><p class="text-xs text-muted-foreground">Leave blank to send immediately. Scheduled messages are processed by Rugplay's background scheduler, usually within 5 minutes of the selected time.</p></div>
+            <div class="space-y-2"><label class="text-sm font-medium" for="adate">Schedule (optional)</label><Input id="adate" type="datetime-local" bind:value={schedule} /><p class="text-xs text-muted-foreground">Leave blank to send immediately. Scheduled messages are processed by Wandplay's background scheduler, usually within 5 minutes of the selected time.</p></div>
             <Button onclick={create} disabled={saving || !title.trim() || !message.trim()}>{saving ? 'Working...' : schedule ? 'Schedule Announcement' : 'Send to All Users'}</Button>
         </Card.Content>
     </Card.Root>

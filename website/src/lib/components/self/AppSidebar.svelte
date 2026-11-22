@@ -73,7 +73,10 @@
 			{ title: 'Treemap', url: '/treemap', icon: Analytics01Icon },
 			{ title: 'Create coin', url: '/coin/create', icon: Coins02Icon },
 			{ title: 'Notifications', url: '/notifications', icon: Notification01Icon },
-			{ title: 'About', url: '/about', icon: InformationCircleIcon }
+			{ title: 'Gifts', url: '/gifts', icon: GiftIcon },
+            { title: 'Report', url: '/report', icon: Shield01Icon },
+            { title: 'Security', url: '/settings/security', icon: Key01Icon },
+            { title: 'About', url: '/about', icon: InformationCircleIcon }
 		]
 	};
 	type MenuButtonProps = HTMLAttributes<HTMLAnchorElement | HTMLButtonElement>;
@@ -209,7 +212,7 @@
 		<div class="flex items-center gap-2 px-2 py-2">
 			<img src="/rugplay.svg" class="h-5 w-5" alt="twoblade" />
 			<div class="flex items-center gap-2">
-				<span class="text-base font-semibold">Rugplay</span>
+				<span class="text-base font-semibold">Wandplay</span>
 				{#if $USER_DATA?.isAdmin}
 					<span class="text-muted-foreground text-xs">| Admin</span>
 				{/if}

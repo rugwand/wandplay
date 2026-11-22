@@ -566,3 +566,40 @@ export const platformControlAudit = pgTable('platform_control_audit', {
     details: text('details').notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow()
 });
+
+// Wandplay community features: transfer audit and player moderation queue.
+export const giftTransfer = pgTable('gift_transfer', {
+    id: serial('id').primaryKey(),
+    senderId: integer('sender_id').references(() => user.id, { onDelete: 'set null' }),
+    recipientId: integer('recipient_id').references(() => user.id, { onDelete: 'set null' }),
+    senderUsername: varchar('sender_username', { length: 30 }).notNull(),
+    recipientUsername: varchar('recipient_username', { length: 30 }).notNull(),
+    kind: varchar('kind', { length: 10 }).notNull(), // GEMS / COLOR
+    gemsAmount: integer('gems_amount'),
+    colorKey: varchar('color_key', { length: 100 }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow()
+}, (table) => ({
+    senderIdx: index('gift_transfer_sender_idx').on(table.senderId),
+    recipientIdx: index('gift_transfer_recipient_idx').on(table.recipientId),
+    createdAtIdx: index('gift_transfer_created_at_idx').on(table.createdAt)
+}));
+
+export const playerReport = pgTable('player_report', {
+    id: serial('id').primaryKey(),
+    reporterId: integer('reporter_id').references(() => user.id, { onDelete: 'set null' }),
+    reporterUsername: varchar('reporter_username', { length: 30 }).notNull(),
+    targetType: varchar('target_type', { length: 10 }).notNull(), // USER / COIN / COMMENT
+    targetId: integer('target_id').notNull(),
+    targetLabel: varchar('target_label', { length: 255 }).notNull(),
+    reason: varchar('reason', { length: 2000 }).notNull(),
+    status: varchar('status', { length: 12 }).notNull().default('OPEN'),
+    reviewedById: integer('reviewed_by_id').references(() => user.id, { onDelete: 'set null' }),
+    reviewedByUsername: varchar('reviewed_by_username', { length: 30 }),
+    reviewNote: varchar('review_note', { length: 1000 }),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow()
+}, (table) => ({
+    reporterIdx: index('player_report_reporter_idx').on(table.reporterId),
+    statusIdx: index('player_report_status_idx').on(table.status),
+    createdAtIdx: index('player_report_created_at_idx').on(table.createdAt)
+}));

@@ -1,6 +1,6 @@
 {
-	"name": "Rugplay",
-	"short_name": "Rugplay",
+	"name": "Wandplay",
+	"short_name": "Wandplay",
 	"description": "A crypto trading simulator: create coins, trade them, and rug pull, with no real money at stake.",
 	"start_url": "/",
 	"scope": "/",

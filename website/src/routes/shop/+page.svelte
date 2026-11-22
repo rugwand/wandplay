@@ -379,8 +379,8 @@
 </script>
 
 <SEO
-	title="Shop - Rugplay"
-	description="Buy Gems to unlock name colors and cosmetics in Rugplay. Open crates for random rewards."
+	title="Shop - Wandplay"
+	description="Buy Gems to unlock name colors and cosmetics in Wandplay. Open crates for random rewards."
 	keywords="rugplay shop, gems, name colors, cosmetics, crates"
 />
 
@@ -603,7 +603,7 @@
 												<span class="font-mono">{reward.weight}%</span>
 											</div>
 										{/each}
-										<div class="text-muted-foreground border-t pt-1">Duplicate colors award Rugplay money instead.</div>
+										<div class="text-muted-foreground border-t pt-1">Duplicate colors award Wandplay money instead.</div>
 									</div>
 								</Tooltip.Content>
 							</Tooltip.Root>

@@ -250,11 +250,11 @@ export async function validateQuestion(question: string, description?: string): 
     }
 
     const prompt = `
-You are evaluating whether a prediction market question is valid and answerable for Rugplay, a cryptocurrency trading simulation platform.
+You are evaluating whether a prediction market question is valid and answerable for Wandplay, a cryptocurrency trading simulation platform.
 
 Question: ${quoteUntrusted(question)}
 
-Current Rugplay Market Context:
+Current Wandplay Market Context:
 - Platform currency: $ (or *BUSS)
 - Total listed coins: ${marketOverview?.marketStats.totalCoins || 0}
 - Total market cap: $${marketOverview?.marketStats.totalMarketCap.toFixed(2) || '0'}
@@ -276,8 +276,8 @@ Determine the optimal resolution date based on the question type:
 - If the question explicitly states the date, use that as the resolution date
 
 Also determine:
-- Whether this question requires web search (external events, real-world data, non-Rugplay information)
-- If the question is related to the Rugplay market, and contains what appears to be a coin name, ensure it's properly formatted (e.g. *BTC, *DOGE). Invalid question example: "will BTC reach $100,000 in 1 hour?" (invalid coin format, should be *BTC). 
+- Whether this question requires web search (external events, real-world data, non-Wandplay information)
+- If the question is related to the Wandplay market, and contains what appears to be a coin name, ensure it's properly formatted (e.g. *BTC, *DOGE). Invalid question example: "will BTC reach $100,000 in 1 hour?" (invalid coin format, should be *BTC). 
 - Provide a specific resolution date with time (suggest times between 12:00-20:00 UTC for good global coverage) The current date and time is ${new Date().toISOString()}.
 
 Note: All coins use *SYMBOL format (e.g., *BTC, *DOGE). All trading is simulated with *BUSS currency.
@@ -295,7 +295,7 @@ Respond with ONLY a JSON object in exactly this format (all fields required):
         const completion = await openai.chat.completions.create({
             model: MODELS.STANDARD,
             messages: [
-                { role: 'system', content: 'You are a prediction market validator for Rugplay, a crypto trading simulation platform. Always respond with valid JSON matching the requested schema.' },
+                { role: 'system', content: 'You are a prediction market validator for Wandplay, a crypto trading simulation platform. Always respond with valid JSON matching the requested schema.' },
                 { role: 'user', content: prompt }
             ],
             temperature: 0.1,
@@ -330,7 +330,7 @@ Respond with ONLY a JSON object in exactly this format (all fields required):
 export async function resolveQuestion(
     question: string,
     requiresWebSearch: boolean,
-    customRugplayData?: string
+    customWandplayData?: string
 ): Promise<QuestionResolutionResult> {
     if (!OPENROUTER_API_KEY) {
         return {
@@ -342,14 +342,14 @@ export async function resolveQuestion(
 
     const model = requiresWebSearch ? MODELS.WEB_SEARCH : MODELS.STANDARD;
 
-    const rugplayData = customRugplayData || await getRugplayData(question);
+    const rugplayData = customWandplayData || await getWandplayData(question);
 
     const prompt = `
-You are resolving a prediction market question with a definitive YES or NO answer for Rugplay.
+You are resolving a prediction market question with a definitive YES or NO answer for Wandplay.
 
 Question: ${quoteUntrusted(question)}
 
-Current Rugplay Platform Data:
+Current Wandplay Platform Data:
 ${rugplayData}
 
 Current timestamp: ${new Date().toISOString()}
@@ -364,7 +364,7 @@ Instructions:
 7. For external/real-world events, use web search if enabled
 8. The resolution date has PASSED - you are resolving this question after the deadline
 
-Context about Rugplay:
+Context about Wandplay:
 - Cryptocurrency trading simulation platform with fake money (*BUSS)
 - All coins use *SYMBOL format (e.g., *BTC, *DOGE, *SHIB)
 - Features AMM liquidity pools, rug pull mechanics, and real market dynamics
@@ -381,7 +381,7 @@ Respond with JSON: { "resolution": boolean, "confidence": number (0-100), "reaso
         const completion = await openai.chat.completions.create({
             model,
             messages: [
-                { role: 'system', content: 'You are a prediction market resolver for Rugplay, a crypto trading simulation platform. Analyze the provided data carefully and resolve the question with a definitive YES or NO. Always respond with valid JSON matching the requested schema. Base your decision on factual data provided, not speculation.' },
+                { role: 'system', content: 'You are a prediction market resolver for Wandplay, a crypto trading simulation platform. Analyze the provided data carefully and resolve the question with a definitive YES or NO. Always respond with valid JSON matching the requested schema. Base your decision on factual data provided, not speculation.' },
                 { role: 'user', content: prompt }
             ],
             temperature: 0.1,
@@ -406,7 +406,7 @@ Respond with JSON: { "resolution": boolean, "confidence": number (0-100), "reaso
     }
 }
 
-export async function getRugplayData(question?: string): Promise<string> {
+export async function getWandplayData(question?: string): Promise<string> {
     try {
         const marketOverview = await getMarketOverview();
 
@@ -426,7 +426,7 @@ export async function getRugplayData(question?: string): Promise<string> {
                 coinSpecificData = '\n\nCoin Analysis for Question:';
 
                 if (nonExistentCoins.length > 0) {
-                    coinSpecificData += `\nNON-EXISTENT COINS: ${nonExistentCoins.map(symbol => `*${symbol}`).join(', ')} - These coins do not exist on the Rugplay platform`;
+                    coinSpecificData += `\nNON-EXISTENT COINS: ${nonExistentCoins.map(symbol => `*${symbol}`).join(', ')} - These coins do not exist on the Wandplay platform`;
                 }
 
                 if (existingCoins.length > 0) {
@@ -455,7 +455,7 @@ ${coin.recentTrades.slice(0, 3).map(trade =>
 
         return `
 Current Timestamp: ${new Date().toISOString()}
-Platform: Rugplay - Cryptocurrency Trading Simulation
+Platform: Wandplay - Cryptocurrency Trading Simulation
 
 Market Overview:
 - Total Listed Coins: ${marketOverview?.marketStats.totalCoins || 0}
@@ -478,7 +478,7 @@ Platform Details:
 - Coins use *SYMBOL format (e.g., *BTC, *DOGE, *SHIB)${coinSpecificData}
         `;
     } catch (error) {
-        console.error('Error generating Rugplay data:', error);
+        console.error('Error generating Wandplay data:', error);
         return `Couldn't retrieve data, please try again later.`;
     }
 }

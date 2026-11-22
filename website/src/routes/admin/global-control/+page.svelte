@@ -30,7 +30,7 @@
     }
     onMount(() => { void refresh(); });
 </script>
-<svelte:head><title>Global Settings | Rugplay</title></svelte:head>
+<svelte:head><title>Global Settings | Wandplay</title></svelte:head>
 <div class="container mx-auto max-w-4xl space-y-6 py-6">
     <div><h1 class="text-2xl font-semibold tracking-tight">Global Settings</h1><p class="text-sm text-muted-foreground">Configure platform access, new accounts and coin creation.</p></div>
     {#if settings}

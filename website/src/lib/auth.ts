@@ -19,6 +19,20 @@ if (!privateEnv.GOOGLE_CLIENT_SECRET) throw new Error('GOOGLE_CLIENT_SECRET is n
 if (!publicEnv.PUBLIC_BETTER_AUTH_URL) throw new Error('PUBLIC_BETTER_AUTH_URL is not set');
 
 export const auth = betterAuth({
+    // Local email/password sign-in; Google OAuth remains enabled below.
+    emailAndPassword: {
+        enabled: true,
+        minPasswordLength: 8
+    },
+    rateLimit: {
+        enabled: true,
+        window: 60,
+        max: 100,
+        customRules: {
+            '/sign-in/email': { window: 60, max: 10 },
+            '/sign-up/email': { window: 60, max: 5 }
+        }
+    },
     databaseHooks: {
         user: {
             create: {
@@ -37,7 +51,7 @@ export const auth = betterAuth({
     },
     baseURL: publicEnv.PUBLIC_BETTER_AUTH_URL,
     secret: privateEnv.PRIVATE_BETTER_AUTH_SECRET,
-    appName: "Rugplay",
+    appName: "Wandplay",
 
     trustedOrigins: [
         publicEnv.PUBLIC_BETTER_AUTH_URL,

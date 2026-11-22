@@ -93,7 +93,7 @@
 </script>
 
 <svelte:head>
-    <title>Coin Management | Rugplay</title>
+    <title>Coin Management | Wandplay</title>
 </svelte:head>
 
 <div class="container mx-auto max-w-4xl space-y-6 py-6">

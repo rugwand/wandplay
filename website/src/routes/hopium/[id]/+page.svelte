@@ -239,11 +239,11 @@
 
 <SEO
 	title={question
-		? `${question.question} - Hopium - Rugplay`
-		: 'Loading Question - Hopium - Rugplay'}
+		? `${question.question} - Hopium - Wandplay`
+		: 'Loading Question - Hopium - Wandplay'}
 	description={question
-		? `Predict "${question.question}" in Rugplay's AI-powered prediction market. Current odds: ${question.yesPercentage.toFixed(1)}% YES, ${question.noPercentage.toFixed(1)}% NO. Total volume: $${question.totalAmount.toFixed(2)}.`
-		: 'AI-powered prediction market question in the Rugplay simulation game.'}
+		? `Predict "${question.question}" in Wandplay's AI-powered prediction market. Current odds: ${question.yesPercentage.toFixed(1)}% YES, ${question.noPercentage.toFixed(1)}% NO. Total volume: $${question.totalAmount.toFixed(2)}.`
+		: 'AI-powered prediction market question in the Wandplay simulation game.'}
 	keywords="AI prediction market question, virtual prediction, cryptocurrency prediction game, yes no prediction, forecasting simulation"
 />
 

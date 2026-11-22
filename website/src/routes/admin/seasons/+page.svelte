@@ -69,7 +69,7 @@
 </script>
 
 <svelte:head>
-	<title>Seasons - Admin | Rugplay</title>
+	<title>Seasons - Admin | Wandplay</title>
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 

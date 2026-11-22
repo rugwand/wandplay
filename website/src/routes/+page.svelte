@@ -194,7 +194,7 @@
 </script>
 
 <SEO
-	title="Rugplay"
+	title="Wandplay"
 	description="A realistic crypto trading simulator that lets you experience the risks and mechanics of decentralized exchanges without real financial consequences. Create coins, trade with liquidity pools, and learn about 'rug pulls' in a... relatively safe environment :)"
 	keywords="crypto simulation game, trading practice game, rug pull simulation, virtual cryptocurrency game"
 />
@@ -211,7 +211,7 @@
 <div class="container mx-auto py-6 sm:px-6">
 	<header class="mb-6">
 		<h1 class="mb-2 truncate text-2xl font-bold sm:text-3xl">
-			{$USER_DATA ? getTimeBasedGreeting($USER_DATA?.name) : 'Welcome to Rugplay!'}
+			{$USER_DATA ? getTimeBasedGreeting($USER_DATA?.name) : 'Welcome to Wandplay!'}
 		</h1>
 		<p class="text-muted-foreground">
 			{#if $USER_DATA}

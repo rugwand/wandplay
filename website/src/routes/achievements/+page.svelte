@@ -136,8 +136,8 @@
 </script>
 
 <SEO
-	title="Achievements - Rugplay"
-	description="Track your progress and unlock achievements in the Rugplay crypto trading simulator. Complete challenges to earn rewards."
+	title="Achievements - Wandplay"
+	description="Track your progress and unlock achievements in the Wandplay crypto trading simulator. Complete challenges to earn rewards."
 	keywords="crypto game achievements, trading simulator challenges, virtual trading rewards"
 />
 

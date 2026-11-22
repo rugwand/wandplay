@@ -262,7 +262,7 @@ export const handle: Handle = async ({ event, resolve }) => {
                     status: 503, headers: { 'Content-Type': 'application/json', 'Retry-After': '300' }
                 });
             }
-            return new Response('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Maintenance</title></head><body style="background:#09090b;color:#eee;font:16px system-ui;max-width:680px;margin:14vh auto;padding:24px"><h1>Maintenance</h1><p>Rugplay is temporarily unavailable.</p></body></html>', {
+            return new Response('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Maintenance</title></head><body style="background:#09090b;color:#eee;font:16px system-ui;max-width:680px;margin:14vh auto;padding:24px"><h1>Maintenance</h1><p>Wandplay is temporarily unavailable.</p></body></html>', {
                 status: 503, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Retry-After': '300' }
             });
         }

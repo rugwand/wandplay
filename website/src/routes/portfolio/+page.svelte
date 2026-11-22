@@ -282,8 +282,8 @@
 </script>
 
 <SEO
-	title="Portfolio - Rugplay"
-	description="View your virtual cryptocurrency portfolio, simulated holdings, and trading performance in the Rugplay simulation game platform."
+	title="Portfolio - Wandplay"
+	description="View your virtual cryptocurrency portfolio, simulated holdings, and trading performance in the Wandplay simulation game platform."
 	noindex={true}
 	keywords="virtual portfolio management, crypto holdings game, trading performance simulator, investment tracking game"
 />

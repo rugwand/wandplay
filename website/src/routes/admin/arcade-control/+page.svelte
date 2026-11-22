@@ -30,7 +30,7 @@
     }
     onMount(() => { void refresh(); });
 </script>
-<svelte:head><title>Arcade Management | Rugplay</title></svelte:head>
+<svelte:head><title>Arcade Management | Wandplay</title></svelte:head>
 <div class="container mx-auto max-w-4xl space-y-6 py-6">
     <div><h1 class="text-2xl font-semibold tracking-tight">Arcade Management</h1><p class="text-sm text-muted-foreground">Manage game availability and server-enforced wager limits.</p></div>
     <Card.Root><Card.Header><Card.Title>Platform Wagering Totals</Card.Title></Card.Header><Card.Content>
@@ -42,7 +42,7 @@
                 <div><p class="text-xs text-muted-foreground">Player losses</p><p class="font-semibold">${Number(totals.playerLosses).toLocaleString()}</p></div>
             </div>
         {/if}
-        <p class="mt-3 text-xs text-muted-foreground">Lifetime aggregate statistics from user accounts. Per-game historical totals are not tracked by this version of Rugplay.</p>
+        <p class="mt-3 text-xs text-muted-foreground">Lifetime aggregate statistics from user accounts. Per-game historical totals are not tracked by this version of Wandplay.</p>
     </Card.Content></Card.Root>
     <Card.Root><Card.Header><Card.Title>Game Controls</Card.Title></Card.Header><Card.Content class="space-y-4">
         <div class="space-y-2"><label for="arcade-reason" class="text-sm font-medium">Reason for changes</label><Input id="arcade-reason" bind:value={reason} /></div>

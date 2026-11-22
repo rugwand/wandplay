@@ -36,7 +36,7 @@
 </script>
 
 <svelte:head>
-	<title>{status} | Rugplay</title>
+	<title>{status} | Wandplay</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
