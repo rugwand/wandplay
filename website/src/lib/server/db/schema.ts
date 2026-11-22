@@ -471,3 +471,33 @@ export const userFollow = pgTable("user_follow", {
 	followingIdIdx: index("user_follow_following_id_idx").on(table.followingId),
 	noSelfFollow: check("no_self_follow", sql`follower_id != following_id`),
 }));
+
+export const adminBalanceAdjustment = pgTable("admin_balance_adjustment", {
+    id: serial("id").primaryKey(),
+
+    adminUserId: integer("admin_user_id").references(() => user.id, {
+        onDelete: "set null"
+    }),
+    targetUserId: integer("target_user_id").references(() => user.id, {
+        onDelete: "set null"
+    }),
+
+    adminUsername: varchar("admin_username", { length: 30 }).notNull(),
+    targetUsername: varchar("target_username", { length: 30 }).notNull(),
+
+    currency: varchar("currency", { length: 10 }).notNull(),
+    operation: varchar("operation", { length: 10 }).notNull(),
+
+    amount: decimal("amount", { precision: 30, scale: 8 }).notNull(),
+    previousBalance: decimal("previous_balance", { precision: 30, scale: 8 }).notNull(),
+    newBalance: decimal("new_balance", { precision: 30, scale: 8 }).notNull(),
+
+    reason: text("reason").notNull(),
+
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
+}, (table) => ({
+    targetUserIdx: index("admin_balance_target_user_idx").on(table.targetUserId),
+    adminUserIdx: index("admin_balance_admin_user_idx").on(table.adminUserId),
+    createdAtIdx: index("admin_balance_created_at_idx").on(table.createdAt)
+}));
+

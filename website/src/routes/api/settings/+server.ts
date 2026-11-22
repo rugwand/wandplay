@@ -88,6 +88,11 @@ export async function POST({ request }) {
 
     if (avatarFile && avatarFile.size > 0) {
         try {
+console.log('[AVATAR DEBUG]', {
+    name: avatarFile.name,
+    type: avatarFile.type,
+    size: avatarFile.size
+});
             const arrayBuffer = await avatarFile.arrayBuffer();
             const key = await uploadProfilePicture(
                 session.user.id,

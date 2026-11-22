@@ -9,6 +9,7 @@
 	import SEO from '$lib/components/self/SEO.svelte';
 	import Dice from '$lib/components/self/games/Dice.svelte';
 	import Tower from '$lib/components/self/games/Tower.svelte';
+	import Blackjack from '$lib/components/self/games/Blackjack.svelte';
 	import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '$lib/components/ui/card';
 	import { arcadeActivityStore } from '$lib/stores/websocket';
 	import * as Avatar from '$lib/components/ui/avatar';
@@ -23,14 +24,15 @@
 
 	let shouldSignIn = $state(false);
 	let balance = $state(0);
-	const GAMES = ['coinflip', 'slots', 'mines', 'dice', 'tower'];
+	const GAMES = ['coinflip', 'slots', 'mines', 'dice', 'tower', 'blackjack'];
 	const LAST_GAME_KEY = 'rugplay:arcade-game';
 	const GAME_LABELS: Record<string, string> = {
 		coinflip: 'Coinflip',
 		slots: 'Slots',
 		mines: 'Mines',
 		dice: 'Dice',
-		tower: 'Tower'
+		tower: 'Tower',
+		blackjack: 'Blackjack'
 	};
 	let gameTabs = $state<HTMLDivElement | null>(null);
 
@@ -145,6 +147,8 @@
 				<Dice bind:balance onBalanceUpdate={handleBalanceUpdate} />
 			{:else if activeGame === 'tower'}
 				<Tower bind:balance onBalanceUpdate={handleBalanceUpdate} />
+			{:else if activeGame === 'blackjack'}
+				<Blackjack bind:balance onBalanceUpdate={handleBalanceUpdate} />
 			{/if}
 
 			<!-- Live Arcade Activity Feed -->
